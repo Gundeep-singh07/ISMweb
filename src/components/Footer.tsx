@@ -82,7 +82,7 @@ const Footer = () => {
               <div className="flex items-center space-x-3 text-primary-foreground/80">
                 <Mail className="w-5 h-5 text-accent flex-shrink-0" />
                 <span className="font-roboto text-sm">
-                  info@manuscriptology.edu
+                  indianmanuscripts1@gmail.com
                 </span>
               </div>
               <div className="flex items-center space-x-3 text-primary-foreground/80">
