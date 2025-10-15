@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Facebook, Twitter, Linkedin, Mail, Phone } from "lucide-react";
+import ismLogo from "../assets/ismLogo.jpeg";
 
 const Footer = () => {
   const quickLinks = [
@@ -18,12 +19,16 @@ const Footer = () => {
           {/* Logo and Description */}
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center">
-                <span className="text-coffee-dark font-bold">ISM</span>
+              <div className="flex items-center space-x-2">
+                <img
+                  src={ismLogo}
+                  alt="ISM Logo"
+                  className="w-10 h-10 object-contain"
+                />
+                <span className="text-primary-foreground font-roboto font-bold text-lg hidden sm:block">
+                  Indian School of Manuscriptology
+                </span>
               </div>
-              <span className="text-primary-foreground font-roboto font-bold text-lg">
-                Indian School of Manuscriptology
-              </span>
             </div>
             <p className="text-primary-foreground/80 font-roboto leading-relaxed max-w-md mb-6">
               Dedicated to preserving and teaching ancient Indian scripts,
