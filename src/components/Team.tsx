@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,6 +11,49 @@ import {
 } from "lucide-react";
 import manjushreePortrait from "@/assets/manjushree-portrait.jpg";
 import techHeadPortrait from "@/assets/tech-head-portrait.jpg";
+
+const SocialButton = ({ href, icon: Icon, label }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <div className="relative inline-block">
+      <Button
+        size="sm"
+        variant="ghost"
+        className="text-primary-foreground hover:text-accent hover:bg-coffee-warm/20 transition-all duration-300"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        asChild
+      >
+        <a href={href} target="_blank" rel="noopener noreferrer">
+          <Icon className="w-5 h-5" />
+        </a>
+      </Button>
+
+      {/* Tooltip Popup */}
+      <div
+        className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-3 transition-all duration-300 pointer-events-none ${
+          isHovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+        }`}
+      >
+        <div className="relative bg-coffee-warm/95 backdrop-blur-sm text-primary-foreground px-4 py-2 rounded-lg shadow-lg whitespace-nowrap border border-coffee-warm/40">
+          <span className="text-sm font-roboto font-medium">{label}</span>
+
+          {/* Speech bubble tail */}
+          <div className="absolute top-full left-1/2 -translate-x-1/2">
+            <div className="border-8 border-transparent border-t-coffee-warm/95" />
+          </div>
+
+          {/* Decorative dots */}
+          <div className="absolute -left-6 top-1/2 -translate-y-1/2 flex gap-1">
+            <div className="w-1.5 h-1.5 rounded-full bg-coffee-warm/60" />
+            <div className="w-1 h-1 rounded-full bg-coffee-warm/40" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const Team = () => {
   return (
@@ -31,11 +74,13 @@ const Team = () => {
             <CardContent className="p-8">
               <div className="flex flex-col items-center text-center mb-6">
                 <div className="w-40 h-40 rounded-full overflow-hidden mb-6 shadow-coffee">
-                  <img
-                    src={manjushreePortrait}
-                    alt="Mrs. Manjushree Ghone-Singh"
-                    className="w-full h-full object-cover"
-                  />
+                  <div className="w-40 h-40 rounded-full overflow-hidden mb-6 shadow-coffee">
+                    <img
+                      src={manjushreePortrait}
+                      alt="Mrs. Manjushree Ghone-Singh"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 </div>
                 <h3 className="text-2xl font-roboto font-bold text-primary-foreground mb-2">
                   Mrs. Manjushree Ghone-Singh
@@ -64,44 +109,17 @@ const Team = () => {
                 </p>
               </div>
               <div className="flex justify-center space-x-4">
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  className="text-primary-foreground hover:text-accent hover:bg-coffee-warm/20"
-                  asChild
-                >
-                  <a
-                    href="https://www.facebook.com/share/1BgPDUnTKN/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Facebook className="w-5 h-5" />
-                  </a>
-                </Button>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  className="text-primary-foreground hover:text-accent hover:bg-coffee-warm/20"
-                  asChild
-                >
-                  <a
-                    href="https://x.com/manjushreeghone?s=21"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Twitter className="w-5 h-5" />
-                  </a>
-                </Button>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  className="text-primary-foreground hover:text-accent hover:bg-coffee-warm/20"
-                  asChild
-                >
-                  <a href="#" target="_blank" rel="noopener noreferrer">
-                    <Linkedin className="w-5 h-5" />
-                  </a>
-                </Button>
+                <SocialButton
+                  href="https://www.facebook.com/share/1BgPDUnTKN/"
+                  icon={Facebook}
+                  label="Facebook"
+                />
+                <SocialButton
+                  href="https://x.com/manjushreeghone?s=21"
+                  icon={Twitter}
+                  label="Twitter"
+                />
+                <SocialButton href="#" icon={Linkedin} label="LinkedIn" />
               </div>
             </CardContent>
           </Card>
@@ -110,11 +128,13 @@ const Team = () => {
             <CardContent className="p-8">
               <div className="flex flex-col items-center text-center mb-6">
                 <div className="w-40 h-40 rounded-full overflow-hidden mb-6 shadow-coffee">
-                  <img
-                    src={techHeadPortrait}
-                    alt="Dr. Kuljeet Singh"
-                    className="w-full h-full object-cover"
-                  />
+                  <div className="w-40 h-40 rounded-full overflow-hidden mb-6 shadow-coffee">
+                    <img
+                      src={techHeadPortrait}
+                      alt="Dr. Kuljeet Singh"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 </div>
                 <h3 className="text-2xl font-roboto font-bold text-primary-foreground mb-2">
                   Dr. Kuljeet Singh
@@ -153,87 +173,34 @@ const Team = () => {
                 </p>
               </div>
               <div className="flex justify-center flex-wrap gap-3">
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  className="text-primary-foreground hover:text-accent hover:bg-coffee-warm/20"
-                  asChild
-                >
-                  <a
-                    href="https://www.linkedin.com/in/kuljeet-singh7/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Linkedin className="w-5 h-5" />
-                  </a>
-                </Button>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  className="text-primary-foreground hover:text-accent hover:bg-coffee-warm/20"
-                  asChild
-                >
-                  <a
-                    href="https://x.com/kuljeet_singh7"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Twitter className="w-5 h-5" />
-                  </a>
-                </Button>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  className="text-primary-foreground hover:text-accent hover:bg-coffee-warm/20"
-                  asChild
-                >
-                  <a
-                    href="https://scholar.google.com/citations?user=SUeFXRIAAAAJ&hl=en"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <GraduationCap className="w-5 h-5" />
-                  </a>
-                </Button>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  className="text-primary-foreground hover:text-accent hover:bg-coffee-warm/20"
-                  asChild
-                >
-                  <a
-                    href="https://www.scopus.com/authid/detail.uri?authorId=57221031051"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <BookOpen className="w-5 h-5" />
-                  </a>
-                </Button>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  className="text-primary-foreground hover:text-accent hover:bg-coffee-warm/20"
-                  asChild
-                >
-                  <a
-                    href="https://orcid.org/0000-0003-2592-8625"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <User className="w-5 h-5" />
-                  </a>
-                </Button>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  className="text-primary-foreground hover:text-accent hover:bg-coffee-warm/20"
-                  asChild
-                >
-                  <a
-                    href="https://www.researchgate.net/profile/Kuljeet-Singh-11"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                <SocialButton
+                  href="https://www.linkedin.com/in/kuljeet-singh7/"
+                  icon={Linkedin}
+                  label="LinkedIn"
+                />
+                <SocialButton
+                  href="https://x.com/kuljeet_singh7"
+                  icon={Twitter}
+                  label="Twitter"
+                />
+                <SocialButton
+                  href="https://scholar.google.com/citations?user=SUeFXRIAAAAJ&hl=en"
+                  icon={GraduationCap}
+                  label="Google Scholar"
+                />
+                <SocialButton
+                  href="https://www.scopus.com/authid/detail.uri?authorId=57221031051"
+                  icon={BookOpen}
+                  label="Scopus"
+                />
+                <SocialButton
+                  href="https://orcid.org/0000-0003-2592-8625"
+                  icon={User}
+                  label="ORCID"
+                />
+                <SocialButton
+                  href="https://www.researchgate.net/profile/Kuljeet-Singh-11"
+                  icon={() => (
                     <svg
                       className="w-5 h-5"
                       viewBox="0 0 24 24"
@@ -241,8 +208,9 @@ const Team = () => {
                     >
                       <path d="M19.586 0c-.818 0-1.508.19-2.073.565-.563.377-.97.936-1.213 1.68a3.193 3.193 0 0 0-.112.437 8.365 8.365 0 0 0-.078.53 9 9 0 0 0-.05.727c-.01.282-.013.621-.013 1.016a31.121 31.121 0 0 0 .014 1.017 9 9 0 0 0 .05.727 7.946 7.946 0 0 0 .077.53h-.005a3.334 3.334 0 0 0 .113.438c.245.743.65 1.303 1.214 1.68.565.376 1.256.564 2.075.564.8 0 1.48-.182 2.048-.547.57-.366.982-.916 1.235-1.65.263-.764.394-1.644.394-2.64 0-1.01-.135-1.895-.405-2.656-.253-.736-.665-1.287-1.235-1.653-.57-.366-1.249-.548-2.048-.548zm-6.868 5.703c-.441.228-.97.425-1.587.59-.618.165-1.279.31-1.981.433a23.85 23.85 0 0 1-2.127.225c-.766.059-1.543.09-2.33.09H2.278v.004H0v18.005h2.278v-8.336h2.415c.788 0 1.565.031 2.33.09.767.06 1.497.149 2.128.225.702.124 1.363.268 1.98.433.618.166 1.147.363 1.588.59.804.415 1.456.975 1.954 1.68.497.704.746 1.618.746 2.742 0 1.158-.249 2.1-.746 2.825-.498.726-1.15 1.302-1.954 1.73-.441.228-.97.425-1.587.59-.618.165-1.279.31-1.981.433a23.85 23.85 0 0 1-2.127.225c-.766.059-1.543.09-2.33.09H2.278v2.278h2.415c.787 0 1.564-.03 2.33-.09.766-.06 1.496-.149 2.127-.225.702-.123 1.363-.268 1.98-.433.618-.165 1.147-.362 1.588-.59 1.187-.606 2.142-1.474 2.866-2.604.724-1.13 1.086-2.465 1.086-4.005 0-1.54-.362-2.875-1.086-4.005-.724-1.13-1.679-1.998-2.866-2.604z" />
                     </svg>
-                  </a>
-                </Button>
+                  )}
+                  label="ResearchGate"
+                />
               </div>
             </CardContent>
           </Card>
