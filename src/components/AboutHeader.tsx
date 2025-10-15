@@ -15,13 +15,13 @@ const AboutHeader = () => {
   const menuItems = [
     { name: "Home", href: "/" },
     { name: "Program List", href: "/#courses" },
-    { name: "Service List", href: "/#services" },
+    // { name: "Service List", href: "/#services" },
     { name: "About Us", href: "/about" },
     { name: "Blog", href: "/#blog" },
     { name: "How It Works", href: "/#how-it-works" },
     { name: "Contact Us", href: "/contact" },
     { name: "Testimonial", href: "/#testimonials" },
-    { name: "Groups", href: "/#groups" },
+    // { name: "Groups", href: "/#groups" },
   ];
 
   return (
