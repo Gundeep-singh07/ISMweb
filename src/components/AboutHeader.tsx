@@ -17,7 +17,7 @@ const AboutHeader = () => {
     { name: "Program List", href: "/#courses" },
     // { name: "Service List", href: "/#services" },
     { name: "About Us", href: "/about" },
-    { name: "Blog", href: "/#blog" },
+    { name: "Blog", href: "/blog" },
     { name: "How It Works", href: "/#how-it-works" },
     { name: "Contact Us", href: "/contact" },
     { name: "Testimonial", href: "/#testimonials" },
