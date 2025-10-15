@@ -24,6 +24,7 @@ const Courses = () => {
         "Master the traditional Marathi script used in historical documents",
       formUrl: "https://forms.gle/tJaVXHYuxHS8N7K69",
     },
+
     {
       name: "Brahmi Lipi Course",
       image: brahmiScript,
