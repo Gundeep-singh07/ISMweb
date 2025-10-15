@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import ismLogo from "../assets/ismLogo.jpeg";
 
 const Header = () => {
   const [currentLanguage, setCurrentLanguage] = useState("English");
@@ -31,9 +32,11 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
-              <span className="text-coffee-dark font-bold text-sm">ISM</span>
-            </div>
+            <img
+              src={ismLogo}
+              alt="ISM Logo"
+              className="w-10 h-10 object-contain"
+            />
             <span className="text-primary-foreground font-roboto font-bold text-lg hidden sm:block">
               Indian School of Manuscriptology
             </span>
@@ -104,15 +107,16 @@ const Header = () => {
               >
                 <div className="flex flex-col space-y-4 mt-8">
                   <div className="flex items-center space-x-2 mb-6">
-                    <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
-                      <span className="text-coffee-dark font-bold text-sm">
-                        ISM
-                      </span>
-                    </div>
+                    <img
+                      src={ismLogo}
+                      alt="ISM Logo"
+                      className="w-10 h-10 object-contain"
+                    />
                     <span className="text-primary-foreground font-roboto font-bold text-lg">
                       Indian School of Manuscriptology
                     </span>
                   </div>
+
                   <nav className="flex flex-col space-y-2">
                     {menuItems.map((item, index) => (
                       <a
@@ -124,6 +128,7 @@ const Header = () => {
                       </a>
                     ))}
                   </nav>
+
                   <div className="pt-4 border-t border-coffee-warm/20">
                     <div className="flex items-center space-x-2 text-primary-foreground">
                       <Globe className="w-4 h-4" />

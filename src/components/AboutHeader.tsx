@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import ismLogo from "../assets/ismLogo.jpeg";
 
 const AboutHeader = () => {
   const [currentLanguage, setCurrentLanguage] = useState("English");
@@ -28,11 +29,12 @@ const AboutHeader = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-coffee-dark backdrop-blur-sm border-b border-coffee-warm/20">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
-          {/* Logo */}
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
-              <span className="text-coffee-dark font-bold text-sm">ISM</span>
-            </div>
+            <img
+              src={ismLogo}
+              alt="ISM Logo"
+              className="w-10 h-10 object-contain"
+            />
             <span className="text-primary-foreground font-roboto font-bold text-lg hidden sm:block">
               Indian School of Manuscriptology
             </span>
