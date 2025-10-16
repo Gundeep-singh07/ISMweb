@@ -18,24 +18,31 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Logo and Description */}
           <div className="lg:col-span-2">
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="flex items-center space-x-2">
+            <div className="flex gap-6 mb-6 items-start">
+              {/* Logo - Increased Size */}
+              <div className="flex-shrink-0">
                 <img
                   src={ismLogo}
                   alt="ISM Logo"
-                  className="w-10 h-10 object-contain"
+                  className="w-24 h-24 object-contain"
                 />
-                <span className="text-primary-foreground font-roboto font-bold text-lg hidden sm:block">
+              </div>
+
+              {/* Text Content */}
+              <div className="flex flex-col justify-start pt-2">
+                <h2 className="text-primary-foreground font-roboto font-bold text-lg mb-3 leading-tight max-w-xs">
                   Indian School of Manuscriptology
-                </span>
+                </h2>
+                <p className="text-primary-foreground/80 font-roboto text-sm leading-relaxed max-w-sm">
+                  Dedicated to preserving and teaching ancient Indian scripts,
+                  connecting modern learners with their cultural heritage
+                  through expert instruction and comprehensive courses.
+                </p>
               </div>
             </div>
-            <p className="text-primary-foreground/80 font-roboto leading-relaxed max-w-md mb-6">
-              Dedicated to preserving and teaching ancient Indian scripts,
-              connecting modern learners with their cultural heritage through
-              expert instruction and comprehensive courses.
-            </p>
-            <div className="flex space-x-4">
+
+            {/* Social Links */}
+            <div className="flex space-x-4 mt-6">
               <Button
                 size="sm"
                 variant="ghost"

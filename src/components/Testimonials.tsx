@@ -4,7 +4,7 @@ import { Star } from "lucide-react";
 const Testimonials = () => {
   const testimonials = [
     {
-      name: "Ananya Sharma",
+      name: "Gundeep Marwah",
       title: "Passionate Learner",
       review:
         "Learning ancient scripts here has been an eye-opening journey. The courses are clear, engaging, and full of rich cultural insights.",
