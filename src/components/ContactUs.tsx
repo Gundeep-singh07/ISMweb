@@ -8,6 +8,7 @@ import {
   Twitter,
   Linkedin,
   Instagram,
+  Loader2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,15 +20,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
+import { submitContactForm } from "../services/formspree";
 
 const ContactUs = () => {
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -39,18 +44,50 @@ const ContactUs = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    });
-    alert("Thank you for your message! We'll get back to you soon.");
+    setIsSubmitting(true);
+
+    try {
+      const result = await submitContactForm(formData);
+
+      if (result.ok) {
+        // Success
+        toast({
+          title: "Message Sent!",
+          description: "Thank you for your message! We'll get back to you soon.",
+          duration: 5000,
+        });
+
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        // Error from Formspree
+        const errorMessage =
+          result.errors?.[0]?.message || "Something went wrong. Please try again.";
+        toast({
+          title: "Error",
+          description: errorMessage,
+          variant: "destructive",
+          duration: 5000,
+        });
+      }
+    } catch (error) {
+      // Network or other error
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again later.",
+        variant: "destructive",
+        duration: 5000,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -62,7 +99,6 @@ const ContactUs = () => {
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-20">
         {/* Background with coffee texture */}
         <div className="absolute inset-0 bg-gradient-to-br from-coffee-dark via-coffee-medium to-coffee-warm" />
-
         {/* Overlay */}
         <div className="absolute inset-0 bg-coffee-dark opacity-60" />
 
@@ -234,6 +270,7 @@ const ContactUs = () => {
                         value={formData.name}
                         onChange={handleInputChange}
                         required
+                        disabled={isSubmitting}
                         className="border-coffee-warm/30 focus:border-coffee-dark focus:ring-coffee-dark font-roboto"
                         placeholder="Enter your full name"
                       />
@@ -253,6 +290,7 @@ const ContactUs = () => {
                         value={formData.email}
                         onChange={handleInputChange}
                         required
+                        disabled={isSubmitting}
                         className="border-coffee-warm/30 focus:border-coffee-dark focus:ring-coffee-dark font-roboto"
                         placeholder="Enter your email address"
                       />
@@ -272,6 +310,7 @@ const ContactUs = () => {
                         value={formData.subject}
                         onChange={handleInputChange}
                         required
+                        disabled={isSubmitting}
                         className="border-coffee-warm/30 focus:border-coffee-dark focus:ring-coffee-dark font-roboto"
                         placeholder="What is this about?"
                       />
@@ -290,6 +329,7 @@ const ContactUs = () => {
                         value={formData.message}
                         onChange={handleInputChange}
                         required
+                        disabled={isSubmitting}
                         rows={5}
                         className="border-coffee-warm/30 focus:border-coffee-dark focus:ring-coffee-dark font-roboto resize-none"
                         placeholder="Tell us more about your inquiry..."
@@ -299,10 +339,20 @@ const ContactUs = () => {
                     <Button
                       type="submit"
                       size="lg"
-                      className="w-full bg-coffee-dark text-primary-foreground hover:bg-coffee-medium font-roboto font-bold text-lg py-6 rounded-full shadow-glow transition-bounce hover:scale-105"
+                      disabled={isSubmitting}
+                      className="w-full bg-coffee-dark text-primary-foreground hover:bg-coffee-medium font-roboto font-bold text-lg py-6 rounded-full shadow-glow transition-bounce hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                     >
-                      <Send className="w-5 h-5 mr-2" />
-                      Send Message
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-5 h-5 mr-2" />
+                          Send Message
+                        </>
+                      )}
                     </Button>
                   </form>
                 </CardContent>
@@ -348,7 +398,6 @@ const ContactUs = () => {
               with cultural heritage
             </p>
           </div>
-
           <div className="border-t border-coffee-warm/20 pt-8">
             <p className="text-primary-foreground/70 font-roboto">
               © 2025 Indian School of Manuscriptology. All Rights Reserved.
