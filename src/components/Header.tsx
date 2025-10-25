@@ -9,22 +9,29 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import ismLogo from "../assets/ismLogo.jpeg";
+import { useTranslation } from "../contexts/TranslationContext";
 
 const Header = () => {
-  const [currentLanguage, setCurrentLanguage] = useState("English");
+  const { language, changeLanguage, t } = useTranslation();
+  const [currentLanguage, setCurrentLanguage] = useState(
+    language === "en" ? "English" : "हिंदी"
+  );
 
-  // Updated menu items with proper navigation
+  // Menu items with translated labels
   const menuItems = [
-    { name: "Home", href: "/" },
-    { name: "Program List", href: "/#courses" },
-    // { name: "Service List", href: "/#services" },
-    { name: "About Us", href: "/about" },
-    { name: "Blog", href: "/blog" },
-    { name: "How It Works", href: "/#how-it-works" },
-    { name: "Contact Us", href: "/contact" },
-    { name: "Testimonial", href: "/#testimonials" },
-    // { name: "Groups", href: "/#groups" },
+    { name: t("home"), href: "/" },
+    { name: t("programList"), href: "/#courses" },
+    { name: t("aboutUs"), href: "/about" },
+    { name: t("blog"), href: "/blog" },
+    { name: t("howItWorks"), href: "/#how-it-works" },
+    { name: t("contactUs"), href: "/contact" },
+    { name: t("testimonial"), href: "/#testimonials" },
   ];
+
+  const handleLanguageChange = (lang: string, label: string) => {
+    setCurrentLanguage(label);
+    changeLanguage(lang);
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-coffee-dark backdrop-blur-sm border-b border-coffee-warm/20">
@@ -38,7 +45,7 @@ const Header = () => {
               className="w-10 h-10 object-contain"
             />
             <span className="text-primary-foreground font-roboto font-bold text-lg hidden sm:block">
-              Indian School of Manuscriptology
+              {t("schoolName")}
             </span>
           </div>
 
@@ -76,13 +83,13 @@ const Header = () => {
               >
                 <DropdownMenuItem
                   className="text-primary-foreground hover:bg-coffee-warm/20 hover:text-accent focus:bg-coffee-warm/20 focus:text-accent"
-                  onClick={() => setCurrentLanguage("English")}
+                  onClick={() => handleLanguageChange("en", "English")}
                 >
                   English
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   className="text-primary-foreground hover:bg-coffee-warm/20 hover:text-accent focus:bg-coffee-warm/20 focus:text-accent"
-                  onClick={() => setCurrentLanguage("हिंदी")}
+                  onClick={() => handleLanguageChange("hi", "हिंदी")}
                 >
                   हिंदी (Hindi)
                 </DropdownMenuItem>
@@ -113,10 +120,9 @@ const Header = () => {
                       className="w-10 h-10 object-contain"
                     />
                     <span className="text-primary-foreground font-roboto font-bold text-lg">
-                      Indian School of Manuscriptology
+                      {t("schoolName")}
                     </span>
                   </div>
-
                   <nav className="flex flex-col space-y-2">
                     {menuItems.map((item, index) => (
                       <a
@@ -128,12 +134,12 @@ const Header = () => {
                       </a>
                     ))}
                   </nav>
-
                   <div className="pt-4 border-t border-coffee-warm/20">
                     <div className="flex items-center space-x-2 text-primary-foreground">
                       <Globe className="w-4 h-4" />
                       <span className="font-roboto font-medium">
-                        Language: {currentLanguage}
+                        {language === "en" ? "Language" : "भाषा"}:{" "}
+                        {currentLanguage}
                       </span>
                     </div>
                   </div>

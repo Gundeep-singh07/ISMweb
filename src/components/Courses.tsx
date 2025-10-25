@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useTranslation } from "@/contexts/TranslationContext";
 import granthaScript from "@/assets/grantha-script.jpg";
 import modiScript from "@/assets/modi-script.jpg";
 import brahmiScript from "@/assets/brahmi-script.jpg";
@@ -9,44 +10,43 @@ import nandinagariScript from "@/assets/nandinagari-script.jpg";
 import kharoshthiScript from "@/assets/kharosthi-script.jpg";
 
 const Courses = () => {
+  const { t } = useTranslation();
+
   const courses = [
     {
       name: "Grantha Lipi Course",
       image: granthaScript,
-      description:
-        "Learn the ancient South Indian script used for Sanskrit manuscripts",
+      descriptionKey: "granthaDescription",
       formUrl: "https://forms.gle/LKuYJ21Ujyxz4Yrc9",
     },
     {
       name: "Modi Lipi Course",
       image: modiScript,
-      description:
-        "Master the traditional Marathi script used in historical documents",
+      descriptionKey: "modiDescription",
       formUrl: "https://forms.gle/tJaVXHYuxHS8N7K69",
     },
-
     {
       name: "Brahmi Lipi Course",
       image: brahmiScript,
-      description: "Discover the mother of all Indian scripts",
+      descriptionKey: "brahmiDescription",
       formUrl: "https://forms.gle/3oo3s8Tpptnejmiu7",
     },
     {
       name: "Sharda Lipi Course",
       image: shardaScript,
-      description: "Explore the beautiful script of Kashmir and ancient texts",
+      descriptionKey: "shardaDescription",
       formUrl: "https://forms.gle/MpzwubsL9oFo9Mf8A",
     },
     {
       name: "Nandināgarī Lipi Course",
       image: nandinagariScript,
-      description: "Study the elegant script used in medieval manuscripts",
+      descriptionKey: "nandinagariDescription",
       formUrl: "https://forms.gle/zWWJoiP3biZfkZT49",
     },
     {
       name: "Kharosthi Lipi Course",
       image: kharoshthiScript,
-      description: "Uncover the ancient Gandhara script from the northwest",
+      descriptionKey: "kharoshthiDescription",
       formUrl: "https://forms.gle/8pd457ArFZJb3XEP9",
     },
   ];
@@ -56,14 +56,12 @@ const Courses = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-roboto font-bold text-coffee-dark mb-4">
-            Our Program List
+            {t("ourProgramList")}
           </h2>
           <p className="text-xl text-coffee-warm max-w-3xl mx-auto font-roboto">
-            Explore our comprehensive courses designed to preserve and teach
-            ancient Indian scripts
+            {t("coursesSubtitle")}
           </p>
         </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {courses.map((course, index) => (
             <Card
@@ -82,13 +80,13 @@ const Courses = () => {
                   {course.name}
                 </h3>
                 <p className="text-coffee-warm mb-4 font-roboto">
-                  {course.description}
+                  {t(course.descriptionKey)}
                 </p>
                 <Button
                   className="bg-coffee-dark hover:bg-coffee-medium text-primary-foreground font-roboto font-medium rounded-full transition-bounce hover:scale-105"
                   onClick={() => window.open(course.formUrl, "_blank")}
                 >
-                  View Course
+                  {t("viewCourse")}
                 </Button>
               </CardContent>
             </Card>

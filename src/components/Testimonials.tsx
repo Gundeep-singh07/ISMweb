@@ -1,54 +1,100 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
+import { useTranslation } from "@/contexts/TranslationContext";
+
 const Testimonials = () => {
+  const { t, language } = useTranslation();
+
+  // Testimonials with language-specific content
   const testimonials = [
     {
       name: "Gundeep Marwah",
-      title: "Passionate Learner",
-      review:
-        "Learning ancient scripts here has been an eye-opening journey. The courses are clear, engaging, and full of rich cultural insights.",
+      title: {
+        en: "Passionate Learner",
+        hi: "उत्साही शिक्षार्थी",
+      },
+      review: {
+        en: "Learning ancient scripts here has been an eye-opening journey. The courses are clear, engaging, and full of rich cultural insights.",
+        hi: "यहां प्राचीन लिपियों को सीखना एक आंखें खोलने वाली यात्रा रही है। पाठ्यक्रम स्पष्ट, आकर्षक और समृद्ध सांस्कृतिक अंतर्दृष्टि से भरे हुए हैं।",
+      },
       rating: 5,
     },
     {
       name: "Rohan Mehta",
-      title: "Cultural Enthusiast",
-      review:
-        "I always wanted to explore manuscripts but didn't know where to start. These courses made it simple and inspiring.",
+      title: {
+        en: "Cultural Enthusiast",
+        hi: "सांस्कृतिक उत्साही",
+      },
+      review: {
+        en: "I always wanted to explore manuscripts but didn't know where to start. These courses made it simple and inspiring.",
+        hi: "मैं हमेशा पांडुलिपियों का पता लगाना चाहता था लेकिन नहीं जानता था कि कहां से शुरू करूं। इन पाठ्यक्रमों ने इसे सरल और प्रेरणादायक बना दिया।",
+      },
       rating: 5,
     },
     {
       name: "Priya Nair",
-      title: "Aspiring Researcher",
-      review:
-        "The step-by-step teaching style helped me connect with our heritage in a meaningful way. Truly a wonderful experience.",
+      title: {
+        en: "Aspiring Researcher",
+        hi: "इच्छुक शोधकर्ता",
+      },
+      review: {
+        en: "The step-by-step teaching style helped me connect with our heritage in a meaningful way. Truly a wonderful experience.",
+        hi: "चरण-दर-चरण शिक्षण शैली ने मुझे हमारी विरासत से सार्थक तरीके से जुड़ने में मदद की। सचमुच एक अद्भुत अनुभव।",
+      },
       rating: 5,
     },
     {
       name: "Vikram Singh",
-      title: "History Teacher",
-      review:
-        "An incredible platform to dive deep into India's linguistic heritage. My students are now more connected to their roots.",
+      title: {
+        en: "History Teacher",
+        hi: "इतिहास शिक्षक",
+      },
+      review: {
+        en: "An incredible platform to dive deep into India's linguistic heritage. My students are now more connected to their roots.",
+        hi: "भारत की भाषाई विरासत में गहराई से जाने के लिए एक अविश्वसनीय मंच। मेरे छात्र अब अपनी जड़ों से अधिक जुड़े हुए हैं।",
+      },
       rating: 5,
     },
     {
       name: "Meera Desai",
-      title: "Sanskrit Scholar",
-      review:
-        "The quality of instruction and materials is outstanding. I've learned so much about manuscript preservation.",
+      title: {
+        en: "Sanskrit Scholar",
+        hi: "संस्कृत विद्वान",
+      },
+      review: {
+        en: "The quality of instruction and materials is outstanding. I've learned so much about manuscript preservation.",
+        hi: "निर्देश और सामग्री की गुणवत्ता उत्कृष्ट है। मैंने पांडुलिपि संरक्षण के बारे में बहुत कुछ सीखा है।",
+      },
       rating: 5,
     },
     {
       name: "Arjun Patel",
-      title: "Graduate Student",
-      review:
-        "This course opened my eyes to the beauty of ancient writing systems. Highly recommended for anyone interested in Indian culture.",
+      title: {
+        en: "Graduate Student",
+        hi: "स्नातक छात्र",
+      },
+      review: {
+        en: "This course opened my eyes to the beauty of ancient writing systems. Highly recommended for anyone interested in Indian culture.",
+        hi: "इस पाठ्यक्रम ने प्राचीन लेखन प्रणालियों की सुंदरता के लिए मेरी आंखें खोल दीं। भारतीय संस्कृति में रुचि रखने वाले किसी भी व्यक्ति के लिए अत्यधिक अनुशंसित।",
+      },
       rating: 5,
     },
   ];
 
+  // Get testimonials in current language
+  const localizedTestimonials = testimonials.map((t) => ({
+    name: t.name,
+    title: t.title[language],
+    review: t.review[language],
+    rating: t.rating,
+  }));
+
   // Duplicate testimonials for seamless loop
-  const duplicatedTestimonials = [...testimonials, ...testimonials];
+  const duplicatedTestimonials = [
+    ...localizedTestimonials,
+    ...localizedTestimonials,
+  ];
 
   return (
     <section
@@ -71,18 +117,15 @@ const Testimonials = () => {
           animation-play-state: paused;
         }
       `}</style>
-
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-roboto font-bold text-coffee-dark mb-4">
-            What Our Students Say
+            {t("whatStudentsSay")}
           </h2>
           <p className="text-xl text-coffee-warm max-w-3xl mx-auto font-roboto">
-            Hear from our community of learners who are discovering the beauty
-            of ancient Indian scripts
+            {t("testimonialsSubtitle")}
           </p>
         </div>
-
         <div className="relative">
           <div className="flex animate-scroll">
             {duplicatedTestimonials.map((testimonial, index) => (
@@ -126,4 +169,5 @@ const Testimonials = () => {
     </section>
   );
 };
+
 export default Testimonials;

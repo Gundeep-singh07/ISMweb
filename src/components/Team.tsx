@@ -9,6 +9,7 @@ import {
   BookOpen,
   User,
 } from "lucide-react";
+import { useTranslation } from "@/contexts/TranslationContext";
 import manjushreePortrait from "@/assets/manjushree-portrait.jpg";
 import techHeadPortrait from "@/assets/tech-head-portrait.jpg";
 
@@ -56,16 +57,17 @@ const SocialButton = ({ href, icon: Icon, label }) => {
 };
 
 const Team = () => {
+  const { t } = useTranslation();
+
   return (
     <section id="about" className="py-20 bg-coffee-dark">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-roboto font-bold text-primary-foreground mb-4">
-            Meet Our Team
+            {t("meetOurTeam")}
           </h2>
           <p className="text-xl text-primary-foreground/80 max-w-3xl mx-auto font-roboto">
-            Learn about the passionate individuals dedicated to preserving
-            India's manuscript heritage
+            {t("teamSubtitle")}
           </p>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
@@ -74,19 +76,17 @@ const Team = () => {
             <CardContent className="p-8">
               <div className="flex flex-col items-center text-center mb-6">
                 <div className="w-40 h-40 rounded-full overflow-hidden mb-6 shadow-coffee">
-                  <div className="w-40 h-40 rounded-full overflow-hidden mb-6 shadow-coffee">
-                    <img
-                      src={manjushreePortrait}
-                      alt="Mrs. Manjushree Ghone-Singh"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+                  <img
+                    src={manjushreePortrait}
+                    alt="Mrs. Manjushree Ghone-Singh"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <h3 className="text-2xl font-roboto font-bold text-primary-foreground mb-2">
                   Mrs. Manjushree Ghone-Singh
                 </h3>
                 <p className="text-accent font-roboto font-medium text-lg mb-4">
-                  Founder & Director
+                  {t("founderDirector")}
                 </p>
               </div>
               <div className="text-primary-foreground/90 font-roboto text-justify leading-relaxed mb-6">
@@ -128,19 +128,17 @@ const Team = () => {
             <CardContent className="p-8">
               <div className="flex flex-col items-center text-center mb-6">
                 <div className="w-40 h-40 rounded-full overflow-hidden mb-6 shadow-coffee">
-                  <div className="w-40 h-40 rounded-full overflow-hidden mb-6 shadow-coffee">
-                    <img
-                      src={techHeadPortrait}
-                      alt="Dr. Kuljeet Singh"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+                  <img
+                    src={techHeadPortrait}
+                    alt="Dr. Kuljeet Singh"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <h3 className="text-2xl font-roboto font-bold text-primary-foreground mb-2">
                   Dr. Kuljeet Singh
                 </h3>
                 <p className="text-accent font-roboto font-medium text-lg mb-4">
-                  Tech Head
+                  {t("techHead")}
                 </p>
               </div>
               <div className="text-primary-foreground/90 font-roboto text-center leading-relaxed mb-6">
