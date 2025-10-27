@@ -33,6 +33,15 @@ const Hero = () => {
         <Button
           size="lg"
           className="animate-slide-up bg-primary-foreground text-coffee-dark hover:bg-coffee-cream font-roboto font-bold text-lg px-8 py-6 rounded-full shadow-glow transition-bounce hover:scale-105"
+          onClick={() => {
+            const coursesSection = document.getElementById("courses");
+            if (coursesSection) {
+              coursesSection.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }
+          }}
         >
           {t("exploreOurCourses")}
         </Button>

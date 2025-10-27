@@ -18,6 +18,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const Blog = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -655,29 +656,7 @@ The digital revolution in manuscript studies is democratizing access to our writ
       </section>
 
       {/* Footer */}
-      <footer className="bg-coffee-dark text-primary-foreground py-12 px-4">
-        <div className="container mx-auto text-center">
-          <div className="mb-8">
-            <div className="flex items-center justify-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
-                <span className="text-coffee-dark font-bold text-sm">ISM</span>
-              </div>
-              <h3 className="text-2xl font-roboto font-bold">
-                Indian School of Manuscriptology
-              </h3>
-            </div>
-            <p className="text-primary-foreground/80 font-roboto max-w-2xl mx-auto">
-              Preserving ancient wisdom through scripts, empowering learners
-              with cultural heritage
-            </p>
-          </div>
-          <div className="border-t border-coffee-warm/20 pt-8">
-            <p className="text-primary-foreground/70 font-roboto">
-              © 2025 Indian School of Manuscriptology. All Rights Reserved.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
