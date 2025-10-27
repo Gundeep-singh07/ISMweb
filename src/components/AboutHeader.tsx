@@ -1,28 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, Globe, Menu, X } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import ismLogo from "../assets/ismLogo.jpeg";
 
 const AboutHeader = () => {
-  const [currentLanguage, setCurrentLanguage] = useState("English");
-
   const menuItems = [
     { name: "Home", href: "/" },
     { name: "Program List", href: "/#courses" },
-    // { name: "Service List", href: "/#services" },
     { name: "About Us", href: "/about" },
     { name: "Blog", href: "/blog" },
     { name: "How It Works", href: "/#how-it-works" },
     { name: "Contact Us", href: "/contact" },
     { name: "Testimonial", href: "/#testimonials" },
-    // { name: "Groups", href: "/#groups" },
   ];
 
   return (
@@ -58,38 +48,13 @@ const AboutHeader = () => {
             ))}
           </nav>
 
-          {/* Language Dropdown */}
+          {/* Right side buttons */}
           <div className="flex items-center space-x-4">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="text-primary-foreground hover:text-accent hover:bg-coffee-warm/20 transition-smooth"
-                >
-                  <Globe className="w-4 h-4 mr-2" />
-                  {currentLanguage}
-                  <ChevronDown className="w-4 h-4 ml-2" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                align="end"
-                className="bg-coffee-medium border-coffee-warm/20 shadow-coffee"
-              >
-                <DropdownMenuItem
-                  className="text-primary-foreground hover:bg-coffee-warm/20 hover:text-accent focus:bg-coffee-warm/20 focus:text-accent"
-                  onClick={() => setCurrentLanguage("English")}
-                >
-                  English
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  className="text-primary-foreground hover:bg-coffee-warm/20 hover:text-accent focus:bg-coffee-warm/20 focus:text-accent"
-                  onClick={() => setCurrentLanguage("हिंदी")}
-                >
-                  हिंदी (Hindi)
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <a href="/#courses" className="hidden lg:inline-block">
+              <Button className="bg-accent hover:bg-accent/90 text-coffee-dark font-roboto font-semibold">
+                Explore Courses
+              </Button>
+            </a>
 
             {/* Mobile Menu */}
             <Sheet>
@@ -133,14 +98,6 @@ const AboutHeader = () => {
                       </a>
                     ))}
                   </nav>
-                  <div className="pt-4 border-t border-coffee-warm/20">
-                    <div className="flex items-center space-x-2 text-primary-foreground">
-                      <Globe className="w-4 h-4" />
-                      <span className="font-roboto font-medium">
-                        Language: {currentLanguage}
-                      </span>
-                    </div>
-                  </div>
                 </div>
               </SheetContent>
             </Sheet>

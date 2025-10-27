@@ -17,6 +17,11 @@ const Header = () => {
     language === "en" ? "English" : "हिंदी"
   );
 
+  // Check if current page is blog or contact
+  const currentPath = window.location.pathname;
+  const hideLanguageSelector =
+    currentPath === "/blog" || currentPath === "/contact";
+
   // Menu items with translated labels
   const menuItems = [
     { name: t("home"), href: "/" },
@@ -50,7 +55,11 @@ const Header = () => {
           </a>
 
           {/* Navigation Menu - Hidden on mobile */}
-          <nav className="hidden lg:flex items-center space-x-6">
+          <nav
+            className={`hidden lg:flex items-center space-x-6 ${
+              hideLanguageSelector ? "flex-1 justify-center" : ""
+            }`}
+          >
             {menuItems.map((item, index) => (
               <a
                 key={index}
@@ -63,38 +72,46 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Language Dropdown */}
+          {/* Language Dropdown or Explore Courses Button */}
           <div className="flex items-center space-x-4">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="text-primary-foreground hover:text-accent hover:bg-coffee-warm/20 transition-smooth"
-                >
-                  <Globe className="w-4 h-4 mr-2" />
-                  {currentLanguage}
-                  <ChevronDown className="w-4 h-4 ml-2" />
+            {hideLanguageSelector ? (
+              <a href="/#courses" className="hidden lg:inline-block">
+                <Button className="bg-accent hover:bg-accent/90 text-coffee-dark font-roboto font-semibold">
+                  Explore Courses
                 </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                align="end"
-                className="bg-coffee-medium border-coffee-warm/20 shadow-coffee"
-              >
-                <DropdownMenuItem
-                  className="text-primary-foreground hover:bg-coffee-warm/20 hover:text-accent focus:bg-coffee-warm/20 focus:text-accent"
-                  onClick={() => handleLanguageChange("en", "English")}
+              </a>
+            ) : (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-primary-foreground hover:text-accent hover:bg-coffee-warm/20 transition-smooth"
+                  >
+                    <Globe className="w-4 h-4 mr-2" />
+                    {currentLanguage}
+                    <ChevronDown className="w-4 h-4 ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  align="end"
+                  className="bg-coffee-medium border-coffee-warm/20 shadow-coffee"
                 >
-                  English
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  className="text-primary-foreground hover:bg-coffee-warm/20 hover:text-accent focus:bg-coffee-warm/20 focus:text-accent"
-                  onClick={() => handleLanguageChange("hi", "हिंदी")}
-                >
-                  हिंदी (Hindi)
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+                  <DropdownMenuItem
+                    className="text-primary-foreground hover:bg-coffee-warm/20 hover:text-accent focus:bg-coffee-warm/20 focus:text-accent"
+                    onClick={() => handleLanguageChange("en", "English")}
+                  >
+                    English
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    className="text-primary-foreground hover:bg-coffee-warm/20 hover:text-accent focus:bg-coffee-warm/20 focus:text-accent"
+                    onClick={() => handleLanguageChange("hi", "हिंदी")}
+                  >
+                    हिंदी (Hindi)
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
 
             {/* Mobile Menu */}
             <Sheet>
@@ -134,15 +151,17 @@ const Header = () => {
                       </a>
                     ))}
                   </nav>
-                  <div className="pt-4 border-t border-coffee-warm/20">
-                    <div className="flex items-center space-x-2 text-primary-foreground">
-                      <Globe className="w-4 h-4" />
-                      <span className="font-roboto font-medium">
-                        {language === "en" ? "Language" : "भाषा"}:{" "}
-                        {currentLanguage}
-                      </span>
+                  {!hideLanguageSelector && (
+                    <div className="pt-4 border-t border-coffee-warm/20">
+                      <div className="flex items-center space-x-2 text-primary-foreground">
+                        <Globe className="w-4 h-4" />
+                        <span className="font-roboto font-medium">
+                          {language === "en" ? "Language" : "भाषा"}:{" "}
+                          {currentLanguage}
+                        </span>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               </SheetContent>
             </Sheet>
