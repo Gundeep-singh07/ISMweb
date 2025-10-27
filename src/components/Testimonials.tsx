@@ -96,6 +96,43 @@ const Testimonials = () => {
     ...localizedTestimonials,
   ];
 
+  // Split into two rows
+  const firstRow = duplicatedTestimonials.slice(0, 6);
+  const secondRow = duplicatedTestimonials.slice(6, 12);
+
+  const TestimonialCard = ({ testimonial }) => (
+    <div className="flex-shrink-0 w-[400px] px-4">
+      <Card className="group bg-coffee-medium border-coffee-warm/20 hover:shadow-warm transition-all duration-300 hover:-translate-y-2 h-full">
+        <CardContent className="p-8 text-center">
+          <div className="w-20 h-20 bg-coffee-light rounded-full mx-auto mb-6 flex items-center justify-center shadow-coffee">
+            <span className="text-2xl font-roboto font-bold text-coffee-dark">
+              {testimonial.name
+                .split(" ")
+                .map((n) => n[0])
+                .join("")}
+            </span>
+          </div>
+          <div className="flex justify-center mb-4">
+            {Array.from({ length: testimonial.rating }, (_, i) => (
+              <Star key={i} className="w-5 h-5 fill-accent text-accent" />
+            ))}
+          </div>
+          <blockquote className="text-primary-foreground/90 font-roboto italic text-lg leading-relaxed mb-6 min-h-[120px]">
+            "{testimonial.review}"
+          </blockquote>
+          <div>
+            <h4 className="text-accent font-roboto font-bold text-lg">
+              {testimonial.name}
+            </h4>
+            <p className="text-primary-foreground/70 font-roboto text-sm">
+              {testimonial.title}
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+
   return (
     <section
       id="testimonials"
@@ -110,10 +147,22 @@ const Testimonials = () => {
             transform: translateX(-50%);
           }
         }
-        .animate-scroll {
-          animation: scroll-left 40s linear infinite;
+        @keyframes scroll-right {
+          0% {
+            transform: translateX(-50%);
+          }
+          100% {
+            transform: translateX(0);
+          }
         }
-        .animate-scroll:hover {
+        .animate-scroll-left {
+          animation: scroll-left 25s linear infinite;
+        }
+        .animate-scroll-right {
+          animation: scroll-right 25s linear infinite;
+        }
+        .animate-scroll-left:hover,
+        .animate-scroll-right:hover {
           animation-play-state: paused;
         }
       `}</style>
@@ -126,42 +175,25 @@ const Testimonials = () => {
             {t("testimonialsSubtitle")}
           </p>
         </div>
-        <div className="relative">
-          <div className="flex animate-scroll">
-            {duplicatedTestimonials.map((testimonial, index) => (
-              <div key={index} className="flex-shrink-0 w-[400px] px-4">
-                <Card className="group bg-coffee-medium border-coffee-warm/20 hover:shadow-warm transition-all duration-300 hover:-translate-y-2 h-full">
-                  <CardContent className="p-8 text-center">
-                    <div className="w-20 h-20 bg-coffee-light rounded-full mx-auto mb-6 flex items-center justify-center shadow-coffee">
-                      <span className="text-2xl font-roboto font-bold text-coffee-dark">
-                        {testimonial.name
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")}
-                      </span>
-                    </div>
-                    <div className="flex justify-center mb-4">
-                      {Array.from({ length: testimonial.rating }, (_, i) => (
-                        <Star
-                          key={i}
-                          className="w-5 h-5 fill-accent text-accent"
-                        />
-                      ))}
-                    </div>
-                    <blockquote className="text-primary-foreground/90 font-roboto italic text-lg leading-relaxed mb-6 min-h-[120px]">
-                      "{testimonial.review}"
-                    </blockquote>
-                    <div>
-                      <h4 className="text-accent font-roboto font-bold text-lg">
-                        {testimonial.name}
-                      </h4>
-                      <p className="text-primary-foreground/70 font-roboto text-sm">
-                        {testimonial.title}
-                      </p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
+
+        <div className="relative space-y-8">
+          {/* First row - scrolling right to left */}
+          <div className="flex animate-scroll-left">
+            {firstRow.map((testimonial, index) => (
+              <TestimonialCard
+                key={`row1-${index}`}
+                testimonial={testimonial}
+              />
+            ))}
+          </div>
+
+          {/* Second row - scrolling left to right */}
+          <div className="flex animate-scroll-right">
+            {secondRow.map((testimonial, index) => (
+              <TestimonialCard
+                key={`row2-${index}`}
+                testimonial={testimonial}
+              />
             ))}
           </div>
         </div>
