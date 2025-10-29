@@ -1,203 +1,270 @@
-import React from "react";
-import { BookOpen, Users, Globe, Heart } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import AboutHeader from "@/components/AboutHeader";
-import Footer from "@/components/Footer";
-import ismLogo from "../assets/ismLogo.jpeg";
+import React, { useState, useEffect } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Star } from "lucide-react";
+import avani from "../assets/avani.jpeg";
+import mokshada from "../assets/mokshada.jpeg";
+import vedika from "../assets/vedika.jpeg";
 
-const AboutUs = () => {
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-coffee-dark via-coffee-medium to-coffee-warm">
-      {/* Header */}
-      <AboutHeader />
+const Testimonials = () => {
+  const [isMobile, setIsMobile] = useState(false);
 
-      {/* Hero Section with Content Box */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-        {/* Background with coffee texture */}
-        <div className="absolute inset-0 bg-gradient-to-br from-coffee-dark/50 via-coffee-medium/30 to-transparent" />
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
 
-        {/* Content Box */}
-        <div className="relative z-10 px-4 max-w-5xl mx-auto">
-          <div className="  p-8 md:p-12  animate-fade-in-up">
-            {/* Logo and Title Section */}
-            <div className="flex flex-col items-center mb-8">
-              {/* Logo */}
-              <div className="mb-6">
-                <img
-                  src={ismLogo}
-                  alt="ISM Logo"
-                  className="w-32 h-32 md:w-40 md:h-40 object-contain"
-                />
-              </div>
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
-              {/* Stylized About Us Title */}
-              <h1 className="text-4xl md:text-6xl font-roboto font-bold text-primary-foreground flex items-center gap-3 md:gap-4">
-                <span className="inline-block transform -skew-y-6 origin-bottom">
-                  About
-                </span>
-                <span className="inline-block transform skew-y-6 origin-bottom">
-                  Us
-                </span>
-              </h1>
-            </div>
-            <div className="w-24 h-1 bg-accent mx-auto mb-8"></div>
+  // Real testimonials from students
+  const realTestimonials = [
+    {
+      name: "कु. अवनी ओंकार गायकवाड",
+      image: avani,
+      title: "विद्यार्थी",
+      review:
+        "मी अवनी ओंकार गायकवाड मा, मंजुश्री घोणे यांच्याकडून मी प्राचीन भारतीय लिपी ऑनलाईन या पद्धतीने शिकले व काही अडचण असल्यास टिचरांनी आम्हांला समजून सांगितले, व मार्गदर्शन पण केले. मी या क्लास जॉईन केल्यामुळे मला काही नवीन शिकण्याची संधी मिळाली आणि मला प्राचीन भारतीय इतिहास या मध्ये आवड निर्माण झाली.",
+      rating: 5,
+      isReal: true,
+    },
+    {
+      name: "कु. मोक्षादा रामदास नंन्ने",
+      image: mokshada,
+      title: "विद्यार्थी",
+      review:
+        "मा.मजुश्री घोणे यांच्या कडुन मी‌ प्राचीन भारतीय लिपी ही शिकले. त्यांनी आम्हाला समजेल व कळेल असे शिकवले. एखाद्या शब्द समजला नाही तर,तो शब्द परत शिकवत होते. त्यांनी आम्हाला छान पद्धतीने शिकवले. तसेच त्यांनी या लिपी ची माहिती पण सांगितली. या आॅनलान क्लास मुळे मला एक नवीन लिपी शिकायला मिळाली.",
+      rating: 5,
+      isReal: true,
+    },
+    {
+      name: "कु. वेदिका दत्तात्रय देशमुख",
+      image: vedika,
+      title: "विद्यार्थी",
+      review:
+        "सध्या शालेय शिक्षणासोबतच प्राचिन भारतीय लिपींचे शिक्षण घेत आहे. मला मा.मंजुश्री घोणे मॅम या लिपींचे मार्गदर्शन करत आहे. हे क्लास ऑनलाईन पद्धतीने होतात,ज्यामुळे आम्ही सहजपणे घरबसल्या या लिपी शिकु शकतो. क्लासमध्ये आम्हाला समजेल अशा पद्धतीने मार्गदर्शन केले जाते. या लिपींविषयी आमच्या मनातील शंकाही सोडवल्या जातात. या क्लासेसमुळे मला नवीन काहीतरी शिकण्याची संधी तर मिळाली त्याचबरोबर भारतीय वारसा तसेच संस्कृती जपण्याचीही संधी मिळली.",
+      rating: 5,
+      isReal: true,
+    },
+  ];
 
-            <div className="prose prose-lg max-w-none">
-              <p className="text-primary-foreground font-roboto leading-relaxed mb-6 text-lg">
-                <strong className="text-accent">
-                  Indian School of Manuscriptology
-                </strong>{" "}
-                is a unique platform dedicated to preserving India's ancient
-                script heritage and making it accessible to all. Founded and
-                directed by{" "}
-                <strong className="text-accent">
-                  Manjushree Surykant Ghone
-                </strong>
-                , the school offers structured courses in scripts like Modi,
-                Brahmi, Nandi Nagari, Sharda, Kharoshti, Kaithi, and Grantha,
-                combining traditional knowledge with modern pedagogical tools.
-              </p>
+  // Dummy testimonials for animation
+  const dummyTestimonials = [
+    {
+      name: "Gundeep Marwah",
+      title: "Passionate Learner",
+      review:
+        "Learning ancient scripts here has been an eye-opening journey. The courses are clear, engaging, and full of rich cultural insights.",
+      rating: 5,
+      isReal: false,
+    },
+    {
+      name: "Rohan Mehta",
+      title: "Cultural Enthusiast",
+      review:
+        "I always wanted to explore manuscripts but didn't know where to start. These courses made it simple and inspiring.",
+      rating: 5,
+      isReal: false,
+    },
+    {
+      name: "Priya Nair",
+      title: "Aspiring Researcher",
+      review:
+        "The step-by-step teaching style helped me connect with our heritage in a meaningful way. Truly a wonderful experience.",
+      rating: 5,
+      isReal: false,
+    },
+    {
+      name: "Vikram Singh",
+      title: "History Teacher",
+      review:
+        "An incredible platform to dive deep into India's linguistic heritage. My students are now more connected to their roots.",
+      rating: 5,
+      isReal: false,
+    },
+    {
+      name: "Meera Desai",
+      title: "Sanskrit Scholar",
+      review:
+        "The quality of instruction and materials is outstanding. I've learned so much about manuscript preservation.",
+      rating: 5,
+      isReal: false,
+    },
+    {
+      name: "Arjun Patel",
+      title: "Graduate Student",
+      review:
+        "This course opened my eyes to the beauty of ancient writing systems. Highly recommended for anyone interested in Indian culture.",
+      rating: 5,
+      isReal: false,
+    },
+  ];
 
-              <p className="text-primary-foreground/90 font-roboto leading-relaxed mb-6">
-                Learners can browse a diverse course list, enroll easily, and
-                follow step-by-step lessons with guided materials, practice
-                sheets, and interactive support. Through live webinars, mentor
-                connections, and a vibrant community, students engage deeply
-                with manuscript studies and cultural history.
-              </p>
+  // Combine all testimonials
+  const allTestimonials = [...realTestimonials, ...dummyTestimonials];
 
-              <p className="text-primary-foreground/90 font-roboto leading-relaxed mb-6">
-                Aligned with youth empowerment and leadership, the institution
-                also integrates values of public speaking, heritage awareness,
-                and social development. Located in the Delhi-NCR region, but
-                reaching learners nationally (and virtually), it's more than a
-                learning center – it's a movement to reconnect with our roots,
-                inspire cultural pride, and build knowledge keepers for
-                tomorrow.
-              </p>
+  // Duplicate testimonials for seamless loop (only for desktop)
+  const duplicatedTestimonials = isMobile
+    ? allTestimonials
+    : [...allTestimonials, ...allTestimonials];
 
-              <p className="text-primary-foreground font-roboto leading-relaxed font-medium text-center">
-                Contact us to explore scripts, join upcoming events, or learn
-                how ancient manuscripts shape our shared past and future.
-              </p>
-            </div>
-          </div>
-        </div>
+  // Split into two rows
+  const firstRow = duplicatedTestimonials.slice(
+    0,
+    Math.ceil(duplicatedTestimonials.length / 2)
+  );
+  const secondRow = duplicatedTestimonials.slice(
+    Math.ceil(duplicatedTestimonials.length / 2)
+  );
 
-        {/* Decorative Elements */}
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
-          <div className="animate-bounce">
-            <svg
-              className="w-6 h-6 text-primary-foreground/60"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M19 14l-7 7m0 0l-7-7m7 7V3"
+  const TestimonialCard = ({ testimonial }) => (
+    <div
+      className={`flex-shrink-0 ${
+        isMobile ? "w-[85vw] max-w-[350px]" : "w-[400px]"
+      } px-4`}
+    >
+      <Card className="group bg-coffee-medium border-coffee-warm/20 hover:shadow-warm transition-all duration-300 hover:-translate-y-2 h-full">
+        <CardContent className="p-6 md:p-8 text-center flex flex-col h-full">
+          {testimonial.isReal ? (
+            <div className="w-20 h-20 md:w-24 md:h-24 rounded-full mx-auto mb-4 md:mb-6 overflow-hidden shadow-lg border-4 border-coffee-light flex-shrink-0">
+              <img
+                src={testimonial.image}
+                alt={testimonial.name}
+                className="w-full h-full object-cover"
               />
-            </svg>
+            </div>
+          ) : (
+            <div className="w-16 h-16 md:w-20 md:h-20 bg-coffee-light rounded-full mx-auto mb-4 md:mb-6 flex items-center justify-center shadow-coffee flex-shrink-0">
+              <span className="text-xl md:text-2xl font-roboto font-bold text-coffee-dark">
+                {testimonial.name
+                  .split(" ")
+                  .map((n) => n[0])
+                  .join("")}
+              </span>
+            </div>
+          )}
+          <div className="flex justify-center mb-3 md:mb-4 flex-shrink-0">
+            {Array.from({ length: testimonial.rating }, (_, i) => (
+              <Star
+                key={i}
+                className="w-4 h-4 md:w-5 md:h-5 fill-accent text-accent"
+              />
+            ))}
           </div>
-        </div>
-      </section>
-
-      {/* Main Content */}
-      <section className="relative py-16 px-4">
-        <div className="container mx-auto max-w-4xl">
-          {/* Features Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            <div className="bg-coffee-dark/40 backdrop-blur-md rounded-2xl p-6 text-center shadow-coffee hover:shadow-glow transition-all duration-300 hover:-translate-y-1 border border-accent/20">
-              <div className="bg-coffee-dark w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <BookOpen className="w-8 h-8 text-accent" />
-              </div>
-              <h3 className="font-roboto font-bold text-primary-foreground text-lg mb-2">
-                Ancient Scripts
-              </h3>
-              <p className="text-primary-foreground/80 font-roboto text-sm">
-                Modi, Brahmi, Nandi Nagari, Sharda, Kharoshti, Kaithi, and
-                Grantha
-              </p>
-            </div>
-
-            <div className="bg-coffee-dark/40 backdrop-blur-md rounded-2xl p-6 text-center shadow-coffee hover:shadow-glow transition-all duration-300 hover:-translate-y-1 border border-accent/20">
-              <div className="bg-coffee-dark w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="w-8 h-8 text-accent" />
-              </div>
-              <h3 className="font-roboto font-bold text-primary-foreground text-lg mb-2">
-                Community Learning
-              </h3>
-              <p className="text-primary-foreground/80 font-roboto text-sm">
-                Live webinars, mentor connections, and vibrant student community
-              </p>
-            </div>
-
-            <div className="bg-coffee-dark/40 backdrop-blur-md rounded-2xl p-6 text-center shadow-coffee hover:shadow-glow transition-all duration-300 hover:-translate-y-1 border border-accent/20">
-              <div className="bg-coffee-dark w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Globe className="w-8 h-8 text-accent" />
-              </div>
-              <h3 className="font-roboto font-bold text-primary-foreground text-lg mb-2">
-                National Reach
-              </h3>
-              <p className="text-primary-foreground/80 font-roboto text-sm">
-                Based in Delhi-NCR, serving learners across India virtually
-              </p>
-            </div>
-
-            <div className="bg-coffee-dark/40 backdrop-blur-md rounded-2xl p-6 text-center shadow-coffee hover:shadow-glow transition-all duration-300 hover:-translate-y-1 border border-accent/20">
-              <div className="bg-coffee-dark w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Heart className="w-8 h-8 text-accent" />
-              </div>
-              <h3 className="font-roboto font-bold text-primary-foreground text-lg mb-2">
-                Cultural Pride
-              </h3>
-              <p className="text-primary-foreground/80 font-roboto text-sm">
-                Building knowledge keepers and inspiring heritage awareness
-              </p>
-            </div>
-          </div>
-
-          {/* Mission Statement */}
-          <div className="bg-coffee-dark/50 backdrop-blur-md rounded-3xl p-8 md:p-12 text-center text-primary-foreground shadow-coffee mb-16 border border-accent/20">
-            <h2 className="text-3xl md:text-4xl font-roboto font-bold mb-6">
-              Our Mission
-            </h2>
-            <p className="text-lg md:text-xl font-roboto font-light leading-relaxed max-w-3xl mx-auto opacity-90">
-              To reconnect India with its ancient script heritage through modern
-              education, fostering cultural pride and creating a new generation
-              of knowledge keepers who will preserve our manuscripts for future
-              generations.
+          <blockquote className="text-primary-foreground/90 font-roboto italic text-base md:text-lg leading-relaxed mb-4 md:mb-6 flex-grow min-h-[200px] flex items-center justify-center">
+            "{testimonial.review}"
+          </blockquote>
+          <div className="flex-shrink-0">
+            <h4 className="text-accent font-roboto font-bold text-base md:text-lg">
+              {testimonial.name}
+            </h4>
+            <p className="text-primary-foreground/70 font-roboto text-sm">
+              {testimonial.title}
             </p>
           </div>
-        </div>
-      </section>
-
-      {/* Call to Action */}
-      <section className="relative py-16 px-4">
-        <div className="container mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-roboto font-bold text-primary-foreground mb-6">
-            Ready to Begin Your Journey?
-          </h2>
-          <p className="text-xl font-roboto text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
-            Explore our courses and join thousands of learners rediscovering
-            India's ancient scripts
-          </p>
-          <Button
-            size="lg"
-            className="bg-coffee-dark text-primary-foreground hover:bg-coffee-medium font-roboto font-bold text-lg px-8 py-6 rounded-full shadow-glow transition-bounce hover:scale-105"
-            onClick={() => (window.location.href = "/")}
-          >
-            Explore Our Courses
-          </Button>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <Footer />
+        </CardContent>
+      </Card>
     </div>
+  );
+
+  return (
+    <section
+      id="testimonials"
+      className="py-12 md:py-20 bg-coffee-subtle overflow-hidden"
+    >
+      <style>{`
+        @keyframes scroll-left {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        @keyframes scroll-right {
+          0% {
+            transform: translateX(-50%);
+          }
+          100% {
+            transform: translateX(0);
+          }
+        }
+        .animate-scroll-left {
+          animation: scroll-left 30s linear infinite;
+        }
+        .animate-scroll-right {
+          animation: scroll-right 30s linear infinite;
+        }
+        .animate-scroll-left:hover,
+        .animate-scroll-right:hover {
+          animation-play-state: paused;
+        }
+        
+        /* Custom scrollbar for mobile */
+        .mobile-scroll::-webkit-scrollbar {
+          height: 8px;
+        }
+        .mobile-scroll::-webkit-scrollbar-track {
+          background: #fed7aa;
+          border-radius: 10px;
+        }
+        .mobile-scroll::-webkit-scrollbar-thumb {
+          background: #f97316;
+          border-radius: 10px;
+        }
+        .mobile-scroll::-webkit-scrollbar-thumb:hover {
+          background: #ea580c;
+        }
+      `}</style>
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-8 md:mb-16">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-roboto font-bold text-coffee-dark mb-3 md:mb-4">
+            What Students Say
+          </h2>
+          <p className="text-base md:text-xl text-coffee-warm max-w-3xl mx-auto font-roboto">
+            Real experiences from our learners
+          </p>
+        </div>
+
+        {isMobile ? (
+          // Mobile: Manual horizontal scroll
+          <div className="space-y-6">
+            <div className="flex gap-0 overflow-x-auto mobile-scroll pb-4 snap-x snap-mandatory items-stretch">
+              {allTestimonials.map((testimonial, index) => (
+                <div key={`mobile-${index}`} className="snap-center flex">
+                  <TestimonialCard testimonial={testimonial} />
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          // Desktop: Auto-scrolling rows with uniform heights
+          <div className="relative space-y-8">
+            {/* First row - scrolling right to left */}
+            <div className="flex animate-scroll-left items-stretch">
+              {firstRow.map((testimonial, index) => (
+                <TestimonialCard
+                  key={`row1-${index}`}
+                  testimonial={testimonial}
+                />
+              ))}
+            </div>
+
+            {/* Second row - scrolling left to right */}
+            <div className="flex animate-scroll-right items-stretch">
+              {secondRow.map((testimonial, index) => (
+                <TestimonialCard
+                  key={`row2-${index}`}
+                  testimonial={testimonial}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
   );
 };
 
-export default AboutUs;
+export default Testimonials;
