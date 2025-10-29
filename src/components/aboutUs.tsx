@@ -7,6 +7,7 @@ import vedika from "../assets/vedika.jpeg";
 
 const Testimonials = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [maxHeight, setMaxHeight] = useState(0);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -17,6 +18,21 @@ const Testimonials = () => {
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
+
+  useEffect(() => {
+    if (isMobile) {
+      // Calculate max height after render
+      setTimeout(() => {
+        const cards = document.querySelectorAll(".testimonial-card");
+        let max = 0;
+        cards.forEach((card) => {
+          const height = card.offsetHeight;
+          if (height > max) max = height;
+        });
+        setMaxHeight(max);
+      }, 100);
+    }
+  }, [isMobile]);
 
   // Real testimonials from students
   const realTestimonials = [
@@ -124,7 +140,10 @@ const Testimonials = () => {
         isMobile ? "w-[85vw] max-w-[350px]" : "w-[400px]"
       } px-4`}
     >
-      <Card className="group bg-coffee-medium border-coffee-warm/20 hover:shadow-warm transition-all duration-300 hover:-translate-y-2 h-full">
+      <Card
+        className="group bg-coffee-medium border-coffee-warm/20 hover:shadow-warm transition-all duration-300 hover:-translate-y-2 h-full testimonial-card"
+        style={isMobile && maxHeight > 0 ? { height: `${maxHeight}px` } : {}}
+      >
         <CardContent className="p-6 md:p-8 text-center flex flex-col h-full">
           {testimonial.isReal ? (
             <div className="w-20 h-20 md:w-24 md:h-24 rounded-full mx-auto mb-4 md:mb-6 overflow-hidden shadow-lg border-4 border-coffee-light flex-shrink-0">
