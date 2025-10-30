@@ -26,7 +26,7 @@ const AboutHeader = () => {
               className="w-10 h-10 object-contain"
             />
             <span className="text-primary-foreground font-roboto font-bold text-lg hidden sm:block">
-              {t("schoolName")}
+              {"Indian School of Manuscriptology"}
             </span>
           </a>
 
