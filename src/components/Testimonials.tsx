@@ -7,6 +7,7 @@ import vedika from "../assets/vedika.jpeg";
 
 const Testimonials = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [maxHeight, setMaxHeight] = useState(0);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -17,6 +18,21 @@ const Testimonials = () => {
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
+
+  useEffect(() => {
+    if (isMobile) {
+      // Calculate max height after render
+      setTimeout(() => {
+        const cards = document.querySelectorAll(".testimonial-card");
+        let max = 0;
+        cards.forEach((card) => {
+          const height = card.offsetHeight;
+          if (height > max) max = height;
+        });
+        setMaxHeight(max);
+      }, 100);
+    }
+  }, [isMobile]);
 
   // Real testimonials from students
   const realTestimonials = [
@@ -34,7 +50,7 @@ const Testimonials = () => {
       image: mokshada,
       title: "विद्यार्थी",
       review:
-        "मा.मजुश्री घोणे यांच्या कडुन मी‌ प्राचीन भारतीय लिपी ही शिकले. त्यांनी आम्हाला समजेल व कळेल असे शिकवले. एखाद्या शब्द समजला नाही तर,तो शब्द परत शिकवत होते. त्यांनी आम्हाला छान पद्धतीने शिकवले. तसेच त्यांनी या लिपी ची माहिती पण सांगितली. या आनलान क्लास मुळे मला एक नवीन लिपी शिकायला मिळाली.",
+        "मा.मजुश्री घोणे यांच्या कडुन मी‌ प्राचीन भारतीय लिपी ही शिकले. त्यांनी आम्हाला समजेल व कळेल असे शिकवले. एखाद्या शब्द समजला नाही तर,तो शब्द परत शिकवत होते. त्यांनी आम्हाला छान पद्धतीने शिकवले. तसेच त्यांनी या लिपी ची माहिती पण सांगितली. या आॅनलान क्लास मुळे मला एक नवीन लिपी शिकायला मिळाली.",
       rating: 5,
       isReal: true,
     },
@@ -230,19 +246,19 @@ const Testimonials = () => {
         {isMobile ? (
           // Mobile: Manual horizontal scroll
           <div className="space-y-6">
-            <div className="flex gap-0 overflow-x-auto mobile-scroll pb-4 snap-x snap-mandatory">
+            <div className="flex gap-0 overflow-x-auto mobile-scroll pb-4 snap-x snap-mandatory items-stretch">
               {allTestimonials.map((testimonial, index) => (
-                <div key={`mobile-${index}`} className="snap-center">
+                <div key={`mobile-${index}`} className="snap-center flex">
                   <TestimonialCard testimonial={testimonial} />
                 </div>
               ))}
             </div>
           </div>
         ) : (
-          // Desktop: Auto-scrolling rows
+          // Desktop: Auto-scrolling rows with uniform heights
           <div className="relative space-y-8">
             {/* First row - scrolling right to left */}
-            <div className="flex animate-scroll-left">
+            <div className="flex animate-scroll-left items-stretch">
               {firstRow.map((testimonial, index) => (
                 <TestimonialCard
                   key={`row1-${index}`}
@@ -252,7 +268,7 @@ const Testimonials = () => {
             </div>
 
             {/* Second row - scrolling left to right */}
-            <div className="flex animate-scroll-right">
+            <div className="flex animate-scroll-right items-stretch">
               {secondRow.map((testimonial, index) => (
                 <TestimonialCard
                   key={`row2-${index}`}
