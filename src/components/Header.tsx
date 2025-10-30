@@ -80,7 +80,7 @@ const Header = () => {
                 alt="ISM Logo"
                 className="w-10 h-10 object-contain"
               />
-              <span className="text-primary-foreground font-roboto font-extrabold text-sm sm:text-base lg:text-lg gradient-text-coffee whitespace-nowrap">
+              <span className="text-primary-foreground font-roboto font-extrabold text-base sm:text-lg lg:text-xl gradient-text-coffee whitespace-nowrap">
                 {t("schoolName")}
               </span>
             </a>
@@ -104,7 +104,7 @@ const Header = () => {
             </nav>
 
             {/* Language Dropdown or Explore Courses Button */}
-            <div className="flex items-center space-x-2 sm:space-x-4">
+            <div className="flex items-center -space-x-2 sm:space-x-4">
               {hideLanguageSelector ? (
                 <a href="/#courses" className="hidden lg:inline-block">
                   <Button className="bg-accent hover:bg-accent/90 text-coffee-dark font-roboto font-semibold">
@@ -169,7 +169,7 @@ const Header = () => {
                         alt="ISM Logo"
                         className="w-10 h-10 object-contain"
                       />
-                      <span className="text-primary-foreground font-roboto font-extrabold text-lg gradient-text-coffee whitespace-nowrap">
+                      <span className="text-primary-foreground font-roboto font-extrabold text-xl gradient-text-coffee whitespace-nowrap">
                         {t("schoolName")}
                       </span>
                     </div>
