@@ -49,7 +49,7 @@ const Header = () => {
               alt="ISM Logo"
               className="w-10 h-10 object-contain"
             />
-            <span className="text-primary-foreground font-roboto font-bold text-lg hidden sm:block">
+            <span className="text-primary-foreground font-roboto font-bold text-lg">
               {t("schoolName")}
             </span>
           </a>
@@ -73,7 +73,7 @@ const Header = () => {
           </nav>
 
           {/* Language Dropdown or Explore Courses Button */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2 sm:space-x-4">
             {hideLanguageSelector ? (
               <a href="/#courses" className="hidden lg:inline-block">
                 <Button className="bg-accent hover:bg-accent/90 text-coffee-dark font-roboto font-semibold">
@@ -88,9 +88,9 @@ const Header = () => {
                     size="sm"
                     className="text-primary-foreground hover:text-accent hover:bg-coffee-warm/20 transition-smooth"
                   >
-                    <Globe className="w-4 h-4 mr-2" />
-                    {currentLanguage}
-                    <ChevronDown className="w-4 h-4 ml-2" />
+                    <Globe className="w-4 h-4 lg:mr-2" />
+                    <span className="hidden lg:inline">{currentLanguage}</span>
+                    <ChevronDown className="w-4 h-4 lg:ml-2" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
@@ -140,6 +140,7 @@ const Header = () => {
                       {t("schoolName")}
                     </span>
                   </div>
+
                   <nav className="flex flex-col space-y-2">
                     {menuItems.map((item, index) => (
                       <a
@@ -151,6 +152,7 @@ const Header = () => {
                       </a>
                     ))}
                   </nav>
+
                   {!hideLanguageSelector && (
                     <div className="pt-4 border-t border-coffee-warm/20">
                       <div className="flex items-center space-x-2 text-primary-foreground">
