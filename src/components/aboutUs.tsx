@@ -51,7 +51,7 @@ const AboutUs = () => {
                 script heritage and making it accessible to all. Founded and
                 directed by{" "}
                 <strong className="text-accent">
-                  Manjushree Surykant Ghone
+                  Mrs. Manjushree Surykant Ghone
                 </strong>
                 , the school offers structured courses in scripts like Modi,
                 Brahmi, Nandi Nagari, Sharda, Kharoshti, Kaithi, and Grantha,
