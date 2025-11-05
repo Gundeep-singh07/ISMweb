@@ -91,10 +91,10 @@ const Team = () => {
               </div>
               <div className="text-primary-foreground/90 font-roboto text-justify leading-relaxed mb-6">
                 <p>
-                  Manjushree Surykant Ghone is the Founder & Director of the
-                  Indian School of Manuscriptology and an accomplished youth
-                  leader, orator, and chess champion. With expertise in ancient
-                  Indian scripts such as Modi, Brahmi, Nandi Nagari, Sharda, and
+                  Manjushree Ghone-Singh is the Founder & Director of the Indian
+                  School of Manuscriptology and an accomplished youth leader,
+                  orator, and chess champion. With expertise in ancient Indian
+                  scripts such as Modi, Brahmi, Nandi Nagari, Sharda, and
                   Grantha, she is dedicated to preserving India's cultural
                   heritage.
                 </p>
@@ -141,33 +141,37 @@ const Team = () => {
                   {t("techHead")}
                 </p>
               </div>
-              <div className="text-primary-foreground/90 font-roboto text-center leading-relaxed mb-6">
-                <p className="mt-4 text-sm opacity-75">
-                  Dr. Kuljeet Singh is an Assistant Professor in the Department
-                  of Computer Science, CHRIST (Deemed to be University),
-                  Delhi-NCR. He earned his Ph.D. in Computer Science from the
-                  Central University of Jammu and his M.Tech. in Computer
-                  Science and Engineering from IIT Patna. He also holds a
-                  Master's degree in Computer Applications from the University
-                  of Jammu. Before joining CHRIST University, Dr. Singh served
-                  as a Lecturer and Head (In-Charge) of the Department of
-                  Computer Science & IT at the University of Jammu, Kishtwar
-                  Campus, for more than two years. He has qualified the National
-                  Eligibility Test (NET) four times consecutively (2019–2021)
-                  and the Himachal Pradesh State Eligibility Test (HP-SET) in
-                  2019. Dr. Singh has an extensive research profile with over 35
-                  SCI and Scopus-indexed journal publications, 10 Scopus-indexed
-                  conference papers, 3 book chapters, 8 patents, and 1 authored
-                  book. He actively contributes to the academic community as an
-                  editorial board member for several journals, including Journal
-                  of Research in Diabetes & Metabolism, Journal of Biomed
-                  Research, Machine Learning in Engineering and Technology, and
-                  Acta Scientific Computer Sciences. In addition, he serves as a
-                  reviewer for reputed journals such as IEEE Communications
-                  Magazine, Computers in Biology and Medicine, Scientific
-                  Reports, BMC Medical Informatics and Decision Making, and
-                  several IEEE, Elsevier, and Springer international
-                  conferences.
+              <div className="text-primary-foreground/90 font-roboto text-justify leading-relaxed mb-6">
+                <p className="mt-4 text-sm">
+                  Dr. Kuljeet Singh is working as an Assistant Professor at the
+                  Department of Computer Science, School of Sciences, Christ
+                  University, Delhi-NCR, India. He earned his Doctoral degree
+                  from the Central University of Jammu and holds an M.Tech. in
+                  Computer Science and Engineering from IIT Patna, as well as an
+                  MCA from the University of Jammu, Jammu and Kashmir, India. He
+                  worked as a lecturer and in-charge head of the department at
+                  the Department of Computer Science and IT, Kishtwar campus,
+                  University of Jammu, for over two years. He qualified for the
+                  National Eligibility Test (NET) four times consecutively from
+                  2019 to 2021, and for the Himachal Pradesh State Eligibility
+                  Test (HP-SET) in 2019. <br />
+                  His research primarily focuses on Artificial Intelligence,
+                  Computational Neuroscience, Healthcare Informatics, Image
+                  Processing, and Meta-Learning. His work integrates intelligent
+                  computing with neuroscience-inspired algorithms to address
+                  complex challenges in medical diagnostics, healthcare
+                  analytics, and human cognition. He continues to explore
+                  innovative and interdisciplinary research that bridges
+                  data-driven technologies with real-world societal
+                  applications. He actively contributes to the global research
+                  community through editorial and reviewing engagements with
+                  reputed international journals and conferences across IEEE,
+                  Elsevier, Springer, and other leading platforms. <br />
+                  Beyond his academic and research pursuits, Dr. Singh is an
+                  International Chess Player, a National Kho-Kho Player, and a
+                  proud NCC cadet holding both 'B' and 'C' certificates
+                  embodying discipline, strategy, and leadership on and off the
+                  field.
                 </p>
               </div>
               <div className="flex justify-center flex-wrap gap-3">

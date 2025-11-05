@@ -86,7 +86,7 @@ const translations = {
     teamSubtitle:
       "Learn about the passionate individuals dedicated to preserving India's manuscript heritage",
     founderDirector: "Founder & Director",
-    techHead: "Tech Head",
+    techHead: "Mentor & Tech Head",
     // About Us
     aboutUsTitle: "About Us",
     aboutUsContent1:

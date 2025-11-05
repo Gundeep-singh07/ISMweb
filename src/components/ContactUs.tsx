@@ -227,7 +227,9 @@ const ContactUs = () => {
                       <Twitter className="w-5 h-5" />
                     </a>
                     <a
-                      href="#"
+                      href="http://linkedin.com/in/indian-manuscripts"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="bg-coffee-dark p-3 rounded-full text-accent hover:bg-coffee-medium transition-all duration-300 hover:scale-110"
                       aria-label="LinkedIn"
                     >

@@ -169,7 +169,7 @@ const Header = () => {
                         alt="ISM Logo"
                         className="w-10 h-10 object-contain"
                       />
-                      <span className="text-primary-foreground font-roboto font-extrabold text-xl gradient-text-coffee whitespace-nowrap">
+                      <span className="text-primary-foreground font-roboto font-extrabold text-xl gradient-text-coffee whitespace-wrap">
                         {t("schoolName")}
                       </span>
                     </div>

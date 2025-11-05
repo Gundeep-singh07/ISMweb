@@ -61,8 +61,15 @@ const Footer = () => {
                 variant="ghost"
                 className="text-primary-foreground hover:text-accent hover:bg-coffee-warm/20 transition-smooth"
                 aria-label="LinkedIn"
+                asChild
               >
-                <Linkedin className="w-5 h-5" />
+                <a
+                  href="http://linkedin.com/in/indian-manuscripts"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Linkedin className="w-5 h-5" />
+                </a>
               </Button>
             </div>
           </div>
@@ -97,7 +104,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3 text-primary-foreground/80">
                 <Phone className="w-5 h-5 text-accent flex-shrink-0" />
-                <span className="font-roboto text-sm">+91 98765 43210</span>
+                <span className="font-roboto text-sm">+91 96233 34690</span>
               </div>
             </div>
           </div>
