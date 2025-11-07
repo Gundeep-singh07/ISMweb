@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Facebook, Twitter, Linkedin, Mail, Phone } from "lucide-react";
+import {
+  Facebook,
+  Twitter,
+  Linkedin,
+  Mail,
+  Phone,
+  Globe,
+  ChevronDown,
+} from "lucide-react";
 import { useTranslation } from "@/contexts/TranslationContext";
 import ismLogo from "../assets/ismLogo.jpeg";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Footer = () => {
-  const { t } = useTranslation();
+  const { language, changeLanguage, t } = useTranslation();
+  const [currentLanguage, setCurrentLanguage] = useState(
+    language === "en" ? "English" : "हिंदी"
+  );
+
   const quickLinks = [
     { nameKey: "home", href: "#home" },
     { nameKey: "programList", href: "#courses" },
@@ -13,6 +31,12 @@ const Footer = () => {
     { nameKey: "contactUs", href: "/contact" },
     { nameKey: "aboutUs", href: "/about" },
   ];
+
+  const handleLanguageChange = (lang: string, label: string) => {
+    setCurrentLanguage(label);
+    changeLanguage(lang);
+  };
+
   return (
     <footer className="bg-coffee-dark py-12 border-t border-coffee-warm/20">
       <div className="container mx-auto px-4">
@@ -38,41 +62,81 @@ const Footer = () => {
                 </p>
               </div>
             </div>
-            {/* Social Links */}
-            <div className="flex space-x-4 mt-6">
-              <Button
-                size="sm"
-                variant="ghost"
-                className="text-primary-foreground hover:text-accent hover:bg-coffee-warm/20 transition-smooth"
-                aria-label="Facebook"
-              >
-                <Facebook className="w-5 h-5" />
-              </Button>
-              <Button
-                size="sm"
-                variant="ghost"
-                className="text-primary-foreground hover:text-accent hover:bg-coffee-warm/20 transition-smooth"
-                aria-label="Twitter"
-              >
-                <Twitter className="w-5 h-5" />
-              </Button>
-              <Button
-                size="sm"
-                variant="ghost"
-                className="text-primary-foreground hover:text-accent hover:bg-coffee-warm/20 transition-smooth"
-                aria-label="LinkedIn"
-                asChild
-              >
-                <a
-                  href="http://linkedin.com/in/indian-manuscripts"
-                  target="_blank"
-                  rel="noopener noreferrer"
+
+            {/* Social Links and Language Selector in One Line */}
+            <div className="flex flex-wrap items-center gap-4 mt-6">
+              {/* Social Links */}
+              <div className="flex space-x-2">
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="text-primary-foreground hover:text-accent hover:bg-coffee-warm/20 transition-smooth"
+                  aria-label="Facebook"
                 >
-                  <Linkedin className="w-5 h-5" />
-                </a>
-              </Button>
+                  <Facebook className="w-5 h-5" />
+                </Button>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="text-primary-foreground hover:text-accent hover:bg-coffee-warm/20 transition-smooth"
+                  aria-label="Twitter"
+                >
+                  <Twitter className="w-5 h-5" />
+                </Button>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="text-primary-foreground hover:text-accent hover:bg-coffee-warm/20 transition-smooth"
+                  aria-label="LinkedIn"
+                  asChild
+                >
+                  <a
+                    href="http://linkedin.com/in/indian-manuscripts"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Linkedin className="w-5 h-5" />
+                  </a>
+                </Button>
+              </div>
+
+              {/* Separator */}
+              <div className="h-6 w-px bg-coffee-warm/20"></div>
+
+              {/* Language Selector */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-primary-foreground hover:text-accent hover:bg-coffee-warm/20 transition-smooth"
+                  >
+                    <Globe className="w-4 h-4 mr-2" />
+                    <span>{currentLanguage}</span>
+                    <ChevronDown className="w-4 h-4 ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  align="start"
+                  className="bg-coffee-medium border-coffee-warm/20 shadow-coffee"
+                >
+                  <DropdownMenuItem
+                    className="text-primary-foreground hover:bg-coffee-warm/20 hover:text-accent focus:bg-coffee-warm/20 focus:text-accent"
+                    onClick={() => handleLanguageChange("en", "English")}
+                  >
+                    English
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    className="text-primary-foreground hover:bg-coffee-warm/20 hover:text-accent focus:bg-coffee-warm/20 focus:text-accent"
+                    onClick={() => handleLanguageChange("hi", "हिंदी")}
+                  >
+                    हिंदी (Hindi)
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
+
           {/* Quick Links */}
           <div>
             <h3 className="text-primary-foreground font-roboto font-bold text-lg mb-6">
@@ -90,6 +154,7 @@ const Footer = () => {
               ))}
             </nav>
           </div>
+
           {/* Contact Info */}
           <div>
             <h3 className="text-primary-foreground font-roboto font-bold text-lg mb-6">
@@ -109,6 +174,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
+
         {/* Copyright */}
         <div className="border-t border-coffee-warm/20 mt-8 pt-8 text-center">
           <p className="text-primary-foreground/60 font-roboto text-sm">
@@ -119,4 +185,5 @@ const Footer = () => {
     </footer>
   );
 };
+
 export default Footer;
